@@ -53,11 +53,13 @@ $ mvn clean install
 The application call a python function which print a message and return a String 
 ```shell 
 $  java -jar target/helloworld-1.0-SNAPSHOT-jar-with-dependencies.jar
+Python Array[2]  is :42
 Hello, GraalVM!
 GraalVM 27-09-2024 13:46
 ```
 
-The first line is printed by the python `print` function
+
+The second line is printed by the python `print` function
 
 
 

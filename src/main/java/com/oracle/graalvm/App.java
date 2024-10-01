@@ -29,14 +29,17 @@ public class App
                 """;
             
           
-                Context context = Context.newBuilder().allowAllAccess(true).build();
+                Context context = Context.newBuilder("js", "python","llvm").allowAllAccess(true).build();
                 
-                //1
-                Value array = context.eval("python", "[1,2,42,4]");
-                int result = array.getArrayElement(2).asInt();
-                System.out.println(" Result is :"+ result);
+                //1 Java - Python basic 
+                int pyResult = context.eval("python", "[1,2,42,4]").getArrayElement(2).asInt();
+                System.out.println(" Python Array[2]  is :"+ pyResult);
 
-                //2
+
+                
+
+
+                //2 - Calling a python function 
                 Source source = Source.create("python", pythonGreetFunctionCode);
                 //you can reference various sources including files.
                 Value pyPart = context.eval(source );
