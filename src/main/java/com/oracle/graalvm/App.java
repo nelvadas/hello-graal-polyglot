@@ -10,13 +10,17 @@ import org.graalvm.polyglot.Value;
 
 /**
  * Hello world Polyglot !
- *
+ *{@link org.graalvm.polyglot}.
+ * <ul>
+ * <li>Use Polyglot context to invoke a simple python script
+ * <li> Use polyglot context to invoke a python function
+ * @return  A string Hello , {name}
+ *          The current date time
  */
 public class App 
 {
 
         public static void main(String[] args) {
-            
                 // A python function 
                 String pythonGreetFunctionCode = """
                 import polyglot
@@ -24,7 +28,7 @@ public class App
 
                 @polyglot.export_value
                 def greet(name="World"):
-                    print(f"Hello, {name}!")
+                    print(f"Jambo, {name}!")
                     return datetime.now().strftime(f"{name} %d-%m-%Y %H:%M" )
                 """;
             
@@ -36,8 +40,6 @@ public class App
                 System.out.println(" Python Array[2]  is :"+ pyResult);
 
 
-                
-
 
                 //2 - Calling a python function 
                 Source source = Source.create("python", pythonGreetFunctionCode);
@@ -48,8 +50,11 @@ public class App
                         .getPolyglotBindings()
                         .getMember("greet")
                          .as(Function.class);
-                 String message = greetFunction.apply("GraalVM");
-                System.out.println(message);
+
+                String input = args.length>0?args[0]:"GraalVM";
+                String outputMessage = greetFunction.apply(input);
+                
+                System.out.println(outputMessage);
             
             
         }
